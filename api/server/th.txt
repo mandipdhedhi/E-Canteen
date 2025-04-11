@@ -1,0 +1,27 @@
+npm install express mongoose bcrypt jsonwebtoken cors
+
+create server folder:
+        open cmd:
+            npm init
+              project name,app.js
+
+        open vs code:
+              npm install express
+              npm install nodemon -g
+
+              create app.js ,
+              npm install mondoose
+
+
+              src:
+                controller: api logic: functions
+                models    : schema : collectoin -->controller
+                routes    : end point --> controller function n
+                utils     : utility functions....
+
+password encrypt :npm install bcrypt 
+
+react to server aip mokalva :npm i cors 
+
+
+
