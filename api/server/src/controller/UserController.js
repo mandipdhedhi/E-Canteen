@@ -3,7 +3,8 @@ const usermodel = require("../models/UserModel");
 const bcrypt = require('bcrypt');
 const adminmode = require("../models/AdminModel")
 const mailUtil = require("../utils/MailUtil")
-const jwt= require("jsonwebtoken")
+const jwt= require("jsonwebtoken");
+const e = require("cors");
 const secret="secret";
 
 
@@ -164,30 +165,54 @@ const login = async (req, res) => {
 };
 
 
-// const loginByToken = async (req, res) => {
-//      const {email,password}=req.body; 
+const loginByToken = async(req,res)=>{
 
-//      const foundEmail  = usermodel.findOne({email:email})
+   try{
+    const email=req.body.email
+    const password=req.body.password
+    let userFound= await usermodel.findOne({email:email}).populate("roleId")
 
-//      if(foundEmail){
-//         const isMatch= bcrypt.compareSync(password,foundEmail.password)
-//         if(isMatch){
-//            const token =  jwt.sign(foundEmail.toObject(),secret)
-//            res.status(200).json({
-//             data:token
-//            })
-//         }else{
-//             res.status(400).json({
-//                 message:"password is not match..."
-//             })
-//         }
-//      }else{
-//        res.status(404).json({
-//         message:"user not found..."
-//        })
-//      }
-     
-// }
+    if(!userFound){
+        userFound = await adminmode.findOne({email:email}).populate("roleId")
+    }
+
+    if(userFound){
+        if(!userFound.password || !password){
+            return  res.status(400).json({ message: "Invalid credentials" });
+        }
+
+    const isMatch = bcrypt.compareSync(password,userFound.password)
+        if(isMatch){
+
+            const token = jwt.sign({userFound},secret) 
+           console.log(token)
+           
+            return  res.status(200).json({
+                message: "Login Successfully...",
+                data: userFound
+            });
+
+           
+        } else{
+            return   res.status(400).json({
+                message: "Your password is wrong..."
+            })
+        }
+    }else{
+        return  res.status(404).json({
+            message:"user Not Found..."
+        })
+    }
+   }catch(err){
+    console.error("Login Error:", err);
+    return   res.status(500).json({
+        message: "Internal Server Error",
+        error: err.message
+    });
+   }
+
+
+}
 
 const forgotpassword = async(req,res)=>{
     
@@ -289,6 +314,6 @@ const changePassword = async (req, res) => {
 // exports
 
 module.exports = {
-    getAllUser, addUsers, deleteUser, signup, login,getUserById,changePassword,forgotpassword,resetpassword
+    getAllUser, addUsers, deleteUser, signup, login,getUserById,changePassword,forgotpassword,resetpassword,loginByToken
 }
 

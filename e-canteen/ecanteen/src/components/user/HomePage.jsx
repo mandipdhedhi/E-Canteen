@@ -298,7 +298,7 @@ const HomePage = () => {
         <h2 style={styles.sectionTitle}>Featured Products</h2>
         <div style={styles.productsGrid}>
           {featuredProducts.map((product) => (
-            <div className="position-relative">
+            <div key={product._id} className="position-relative">
               <img
                 src={product.productImageURL1}
                 alt={product.productName}

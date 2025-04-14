@@ -11,13 +11,26 @@ const AddAdmin = () => {
     try {
       setLoading(true);
       console.log(data)
+      if(data.roleId==="67c5c4e0e375b3c915fa401b"){
+        data.canteen="Jodhpur"
+
+        const response = await axios.post("/signup", data)
+        console.log(response)
+        
+        if (response.data) {
+          toast.success("Admin registered successfully!");
+          reset(); // Reset form after successful submission
+        }
+      }else{
       const response = await axios.post("/admin/addadmin", data);
       console.log("Admin Registration Response:", response.data);
-      
+
       if (response.data) {
         toast.success("Admin registered successfully!");
         reset(); // Reset form after successful submission
       }
+      }
+      
     } catch (error) {
       console.error("Registration Error:", error);
       toast.error(error.response?.data?.message || "Failed to register admin");
@@ -115,11 +128,12 @@ const AddAdmin = () => {
               <label className="form-label">Role</label>
               <select
                 className="form-select"
-                {...register("role", {
+                {...register("roleId", {
                   required: "Role is required"
                 })}
               >
-                <option value="admin">Admin</option>
+                <option value="67c5c4d5e375b3c915fa4019">Admin</option>
+                <option value="67c5c4e0e375b3c915fa401b">User</option>
               </select>
               {errors.role && (
                 <div className="text-danger">{errors.role.message}</div>

@@ -9,11 +9,11 @@ import { Navigate, Outlet } from "react-router-dom";
     useEffect(()=>{
         const id = localStorage.getItem("id");
         const role = localStorage.getItem("role");
-          console.log(id,role)
+          // console.log(id,role)
         if(id){
-            setauthState({isLoggedin:true,role:role})
+            setauthState({isLoggedin:true,role:role || ""})
         }
-        console.log(authState)
+        // console.log(authState)
         setloading(false);
     },[])
     return { ...authState, loading };

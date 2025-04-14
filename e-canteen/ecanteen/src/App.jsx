@@ -80,6 +80,7 @@ function App() {
         <Route path='/forgot' element={<ForgotPassword/>}></Route>
         <Route path='/resetpassword/:token' element={<ResetPassword/>}/>
         <Route path='/' element={<Homepage/>}></Route>
+        <Route path='/user/logout' element={<Logout/>}/>
 
         {/* <Route path="/" element={<PrivateRoutes />}>  */}
           <Route path='/' element={<UserPrivateRoute/>}> 
@@ -88,7 +89,7 @@ function App() {
            {/* <Route path='/user' element={<Navbar/>}> */}
 
             <Route index element={<HomePage />} />
-            <Route path='logout' element={<Logout/>}/>
+           
             <Route path='home' element={<HomePage />} />
             <Route path='products' element={<ProductsPage />} />
             <Route path='products/:productId' element={<ProductDetailPage />} />
