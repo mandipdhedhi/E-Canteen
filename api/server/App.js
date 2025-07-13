@@ -2,9 +2,11 @@ const express=require("express");
 const app=express();
 const mongoose=require("mongoose");
 const cors=require("cors")
-
+const path = require("path");
 app.use(express.json()) //to accept data as json..
 app.use(cors())
+
+const _dirname=path.resolve()
 // basic API ctreate
 
         // app.get("/",(req,res)=>{
@@ -94,11 +96,14 @@ app.use('/address', addressRoutes);
 
 
 
+app.use(express.static(path.join(_dirname,"/e-canteen/ecanteen/dist")))
+app.get('*',(req,res)=>{
+  res.sendFile(path.resolve(_dirname,"e-canteen","dist","index.html"))
+})
 
 
 
-
-      const PORT=3001;
+      const PORT=3001 || process.env.PORT;
             app.listen(PORT,()=>{
     console.log("server started successfully PORT...",PORT);
 })
