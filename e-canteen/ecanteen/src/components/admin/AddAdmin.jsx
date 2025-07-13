@@ -23,12 +23,16 @@ const AddAdmin = () => {
         }
       }else{
       const response = await axios.post("/admin/addadmin", data);
-      console.log("Admin Registration Response:", response.data);
+      console.log("Admin Registration Response:", response);
 
-      if (response.data) {
+      if (response.data.message == "email number already in use") {
+        toast.success("Admin registered successfully!");
+        reset();
+      } else if (response.data) {
         toast.success("Admin registered successfully!");
         reset(); // Reset form after successful submission
       }
+      
       }
       
     } catch (error) {

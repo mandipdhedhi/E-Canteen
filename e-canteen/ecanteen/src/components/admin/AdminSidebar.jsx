@@ -24,9 +24,9 @@ const AdminSidebar = ({ isSidebarOpen }) => {
         <div className="menu-item">
               <Link to="review" style={{color:"black"}}>Reviews & Ratings</Link>
         </div>
-        <div className="menu-item">
+        {/* <div className="menu-item">
           <Link to="reports" style={{color:"black"}}>Reports & Analytics</Link>
-        </div>
+        </div> */}
         <div className="menu-item">
           <Link to="settings" style={{color:"black"}}>Settings</Link>
         </div>

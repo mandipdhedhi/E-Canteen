@@ -58,7 +58,7 @@ exports.getOrderDetailByOrderId = async (req, res) => {
    
         // Validate ObjectId
        
-        const orderDetail = await OrderDetail.find().select("_id").populate("addressId userId items");
+        const orderDetail = await OrderDetail.findOne({_id:id}).populate("addressId userId items");
 
         if (!orderDetail) {
             return res.status(404).json({ message: "Order Detail not found" });

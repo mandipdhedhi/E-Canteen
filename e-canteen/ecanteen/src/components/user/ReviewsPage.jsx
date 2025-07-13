@@ -51,8 +51,8 @@ const ReviewsPage = () => {
     
     try {
       const response = await axios.get(`/orderdetail/orderId/${orderId}`);
-      console.log("orderDetails",response.data[0]);
-      setOrderDetails(response.data[0]);
+      console.log("orderDetails",response.data);
+      setOrderDetails(response.data);
     } catch (err) {
       setError('Failed to fetch order details. Please try again later.');
       console.error('Error fetching order details:', err);

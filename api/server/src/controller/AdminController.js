@@ -6,7 +6,10 @@ const addAdmin=async(req,res)=>{
       const sale=bcrypt.genSaltSync(10);
       const hashedpassword=bcrypt.hashSync(req.body.password,sale);
       req.body.password=hashedpassword;
-
+      const founadmin=await adminmodel.findOne({ email: req.body.email });
+      if (founadmin) {
+        return res.status(200).json({ message: "email already in use" });
+     }
       const createAdmin=await adminmodel.create(req.body);
     
       res.status(201).json({
