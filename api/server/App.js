@@ -96,9 +96,9 @@ app.use('/address', addressRoutes);
 
 
 
-app.use(express.static(path.join(_dirname,"/e-canteen/ecanteen/dist")))
+app.use(express.static(path.join(_dirname, "e-canteen", "ecanteen", "dist")))
 app.get('*',(req,res)=>{
-  res.sendFile(path.resolve(_dirname,"e-canteen","dist","index.html"))
+  res.sendFile(path.resolve(_dirname,"e-canteen", "ecanteen", "dist", "index.html"))
 })
 
 
