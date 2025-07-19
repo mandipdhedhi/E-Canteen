@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build":"npm install && npm install --prefix e-canteen/ecanteen && npm run build --prefix e-canteen/ecanteen",
     "dev": "npx nodemon api/server/app.js",     
-    "start":"node api/server/app.js"
+   "start": "node e-canteen/api/server/app.js"
+
   },
   "author": "",
   "license": "ISC",
