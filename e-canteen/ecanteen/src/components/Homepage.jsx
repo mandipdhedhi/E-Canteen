@@ -16,7 +16,7 @@ export const Homepage = () => {
         <h1>digital</h1>
         <h1>E-Canteen</h1>
         <h1> experience</h1>
-        <button><a href="http://localhost:5173/login">  LOGIN</a></button>
+        <button><a href="http://localhost:3001/login">  LOGIN</a></button>
 
         {/* <button> <Link to="/login" style={{ textDecoration: 'none' }}>LOGIN</Link> */}
         {/* </button>        */}
