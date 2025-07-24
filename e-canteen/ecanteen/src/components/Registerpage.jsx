@@ -3,7 +3,7 @@ import '../assets/registerpage.css'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Registerpage = () => {
   const navigate = useNavigate()
@@ -181,8 +181,8 @@ export const Registerpage = () => {
             <p style={{color:"red"}}>{enableRegistration ? "" : "Registration is not allowed at this time."}</p>
           </div>
 
-          <div className="inputdiv"><p style={{ color: "black" }}>Already have an account? <a href="http://localhost:5173/login">Sign in</a></p></div>
-
+          <div className="inputdiv"><p style={{ color: "black" }}>Already have an account?<Link to="/login">Sign in</Link></p></div>
+          
         </div>
       </form>
     </div>

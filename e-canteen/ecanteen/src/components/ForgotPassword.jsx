@@ -2,6 +2,7 @@ import React from 'react'
 import '../assets/img/login.css'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 export const ForgotPassword = () => {
@@ -55,7 +56,7 @@ export const ForgotPassword = () => {
             <input type="Submit" value="Forgot" className='forgot-div' style={{backgroundColor:"#fea116"}} />
             </div>
         </form>
-            <div className="inputdiv" style={{marginLeft:"10px",gap:"40px"}}><a href="http://localhost:5173/">| Back To Home </a><a href="http://localhost:5173/login" style={{marginLeft:"40px"}}>| Sign in</a></div>
+            <div className="inputdiv" style={{marginLeft:"10px",gap:"40px"}}><Link to="/">| Back To Home </Link><Link to="/login" style={{marginLeft:"40px"}}>| Sign in</Link></div>
 
     </div>
   )

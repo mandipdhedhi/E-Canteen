@@ -3,7 +3,7 @@ import '../assets/img/login.css'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export const Loginpage = () => {
 
@@ -136,9 +136,9 @@ export const Loginpage = () => {
             <input type="submit" value="SIGN IN" className='singin' />
           </div>
 
-          <div className="inputdiv"><p style={{ color: "black" }}> <a href="http://localhost:5173/">Back To Home </a>| Don't have an account?</p></div>
-          <div style={{ marginLeft: "20px", gap: "20px" }}><a href="http://localhost:5173/register">Register Here</a>
-            <a href="http://localhost:5173/forgot" style={{ marginLeft: "60px" }}>Forgot Password</a>
+          <div className="inputdiv"><p style={{ color: "black" }}> <Link to="/">Back To Home</Link>| Don't have an account?</p></div>
+          <div style={{ marginLeft: "20px", gap: "20px" }}><Link to="/register">Register Here</Link>
+            <Link to="/forgot" style={{ marginLeft: "60px" }}>Forgot Password</Link>
           </div>
 
         </div>
