@@ -47,7 +47,8 @@ import { UserPrivateRoute } from './components/hooks/UserPrivateRoute';
 import { ResetPassword } from './components/ResetPassword';
 
 function App() {
-     axios.defaults.baseURL="http://localhost:3001"
+    //  axios.defaults.baseURL="http://localhost:3001"
+     axios.defaults.baseURL="https://e-canteen.onrender.com"
      
      const location = useLocation();
 

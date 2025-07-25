@@ -122,7 +122,7 @@ export const Loginpage = () => {
 
 
           <div className="inputdiv">
-            <input type="password" placeholder='Password' {...register("password", formvalidation.passwordvalidation)} />
+            <input type="password" placeholder='Password'  autocomplete="current-password" {...register("password", formvalidation.passwordvalidation)} />
             <span>
               {
                 errors.password?.message
