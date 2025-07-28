@@ -84,7 +84,9 @@ app.use('/address', addressRoutes);
 
 // mongoose data base connection create
 
-   mongoose.connect("mongodb://localhost:27017/myproject"
+    // mongoose.connect("mongodb+srv://mandipdhedhi8787:MySecretPassword123@cluster0.wftbt.mongodb.net/?retryWrites=true&w=majority"
+    mongoose.connect("mongodb+srv://mandip:Mandip123@cluster0.wftbt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
     ).then(()=>{
       console.log("database connected successfully");
     }).catch((err)=>{
