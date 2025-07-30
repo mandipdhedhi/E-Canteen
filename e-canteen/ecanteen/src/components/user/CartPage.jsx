@@ -18,8 +18,9 @@ const CartPage = () => {
         setLoading(true);
       
         const userId = localStorage.getItem("id");
+        
         // console.log(userId)
-        const response = await axios.get(`/cart/${userId}`);
+        const response = await axios.get(`/cart/6886f2022918e10fe2e6ef00`);
         console.log(response.data)
     
        setCartItems(response.data);

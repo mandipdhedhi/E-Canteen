@@ -48,7 +48,7 @@ export const Loginpage = () => {
       
       localStorage.setItem("id",res.data.data._id)
       localStorage.setItem("role",res.data.data.roleId.role)
-
+      
     
 
       setTimeout(() => {
