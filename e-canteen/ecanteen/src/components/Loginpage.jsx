@@ -48,12 +48,12 @@ export const Loginpage = () => {
       
       localStorage.setItem("id",res.data.data._id)
       localStorage.setItem("role",res.data.data.roleId.role)
-      
+      const userId=res.data.data._id;
     
 
       setTimeout(() => {
         if(res.data.data.roleId.role==="user" || res.data.data.roleId.role==="customer" || res.data.data.roleId.role==="ServiceProvider"){
-          navigate("/user")
+          navigate(`/user/${userId}/home`)
         }else if(res.data.data.roleId.role==="admin"){
           navigate("/admin")
         }

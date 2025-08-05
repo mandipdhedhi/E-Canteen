@@ -5,6 +5,7 @@ const adminmode = require("../models/AdminModel")
 const mailUtil = require("../utils/MailUtil")
 const jwt= require("jsonwebtoken");
 const e = require("cors");
+const { default: mongoose } = require("mongoose");
 const secret="secret";
 
 
@@ -22,13 +23,18 @@ const getAllUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
+        console.log(req.params)
         const userId = req.params.id;
         console.log("Fetching user with ID:", userId);
+    
 
+          if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ error: "Invalid User ID" });
+  }
      
         // Find user by ID
         const user = await usermodel.findById(userId);
-
+           
         if (!user) {
             return res.status(404).json({
                 success: false,

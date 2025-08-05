@@ -21,8 +21,10 @@ exports.addToCart = async (req, res) => {
 
 exports.getUserCart = async (req, res) => {
     try {
+        console.log(req.params.userId)  
         const cartItems = await Cart.find({ userId: req.params.userId }).populate('productId');
         res.json(cartItems);
+       
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

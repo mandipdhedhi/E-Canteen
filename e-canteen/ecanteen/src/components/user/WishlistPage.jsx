@@ -7,6 +7,13 @@ const WishlistPage = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userId, setUserId] = useState();
+
+useEffect(() => {
+  const id = localStorage.getItem("id");
+  setUserId(id);
+}, []);
+
 
   useEffect(() => {
     const fetchWishlistItems = async () => {
@@ -116,7 +123,7 @@ const WishlistPage = () => {
             <i className="bi bi-heart fs-1 text-muted mb-3"></i>
             <h3 className="h4 mb-3">Your wishlist is empty</h3>
             <p className="text-muted mb-4">Browse our products and add items you love to your wishlist!</p>
-            <Link to="/user/products" className="btn btn-primary">
+            <Link to={userId ? `/user/${userId}/products` : "/login"} className="btn btn-primary">
               Browse Products
             </Link>
           </div>
@@ -169,7 +176,7 @@ const WishlistPage = () => {
                             </div>
                           </div>
                           <h5 className="card-title">
-                            <Link to={`/user/products/${item.productId}`} className="text-decoration-none text-dark">
+                            <Link to={`/user/${userId}/products/${item.productId}`} className="text-decoration-none text-dark">
                               {item.productId?.productName}
                             </Link>
                           </h5>

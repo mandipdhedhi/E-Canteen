@@ -9,6 +9,13 @@ const ProductsPage = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userId, setUserId] = useState();
+
+useEffect(() => {
+  const id = localStorage.getItem("id");
+  setUserId(id);
+}, []);
+
   
   // Filter states
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -303,7 +310,9 @@ const ProductsPage = () => {
                       </div>
                       
                       <h5 className="card-title">
-                        <Link to={`/user/products/₹{product.id}`} className="text-decoration-none text-dark">
+                        <Link
+                        //  to={`/user/${userId}/products/₹{product.id}`} 
+                         className="text-decoration-none text-dark">
                           {product.productName}
                         </Link>
                       </h5>

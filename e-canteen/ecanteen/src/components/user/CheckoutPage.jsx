@@ -13,6 +13,12 @@ const CheckoutPage = () => {
   const [couponApplied, setCouponApplied] = useState(false);
   const [discount, setDiscount] = useState(0);
   const [couponCode, setCouponCode] = useState('');
+   const [userId, setUserId] = useState();
+  
+  useEffect(() => {
+    const id = localStorage.getItem("id");
+    setUserId(id);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -159,7 +165,7 @@ const CheckoutPage = () => {
           <i className="bi bi-cart-x fs-1 text-muted mb-3"></i>
           <h3 className="h4 mb-3">Your cart is empty</h3>
           <p className="text-muted mb-4">Add some items to your cart to proceed with checkout.</p>
-          <Link to="/user/products" className="btn btn-primary">
+          <Link to={userId ? `/user/${userId}/products` : "/login"} className="btn btn-primary">
             Browse Products
           </Link>
         </div>
@@ -188,7 +194,7 @@ const CheckoutPage = () => {
               {addresses.length === 0 ? (
                 <div className="text-center py-3">
                   <p className="mb-3">No addresses found</p>
-                  <Link to="/user/addresses" className="btn btn-primary">
+                  <Link to={userId ? `/user/${userId}/addresses` : "/login"} className="btn btn-primary">
                     Add New Address
                   </Link>
                 </div>
@@ -220,7 +226,7 @@ const CheckoutPage = () => {
                     ))}
                   </div>
                   <div className="mt-3">
-                    <Link to="/user/addresses" className="btn btn-outline-primary">
+                    <Link to={userId ? `/user/${userId}/addresses` : "/login"} className="btn btn-outline-primary">
                       Add New Address
                     </Link>
                   </div>
@@ -397,7 +403,7 @@ const CheckoutPage = () => {
               </button>
 
               <div className="text-center">
-                <Link to="/user/cart" className="btn btn-link text-decoration-none">
+                <Link to={userId ? `/user/${userId}/cart` : "/login"} className="btn btn-link text-decoration-none">
                   <i className="bi bi-arrow-left me-2"></i>
                   Back to Cart
                 </Link>

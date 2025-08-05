@@ -10,6 +10,14 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 export const UserNavbar = () => {
   const [siteData, setSiteData] = useState([]);
   const location = useLocation();
+  const [userId, setUserId] = useState(null);
+
+useEffect(() => {
+  const id = localStorage.getItem("id");
+  setUserId(id);
+}, []);
+
+  
 
   useEffect(() => {
     const fetchSiteData = async () => {
@@ -42,7 +50,7 @@ export const UserNavbar = () => {
           {/* Brand */}
           <div className="navbar-brand">
             {siteData.map((item) => (
-              <Link to="/user" className="text-decoration-none" key={item._id} onClick={closeMobileMenu}>
+              <Link to={userId ? `/user/${userId}/home` : "/login"} className="text-decoration-none" key={item._id} onClick={closeMobileMenu}>
                 <span className="fw-bold fs-4 text-primary">{item.siteName}</span>
               </Link>
             ))}
@@ -65,17 +73,17 @@ export const UserNavbar = () => {
           <div className="collapse navbar-collapse" id="navbarContent">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <Link to="/user/home" className={`nav-link px-3 ${isActiveRoute('/user/home')}`} onClick={closeMobileMenu}>
+                <Link  to={userId ? `/user/${userId}/home` : "/login"} className={`nav-link px-3 ${isActiveRoute('/user/home')}`} onClick={closeMobileMenu}>
                   <i className="bi bi-house-door me-1"></i> Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/user/products" className={`nav-link px-3 ${isActiveRoute('/user/products')}`} onClick={closeMobileMenu}>
+                <Link  to={userId ? `/user/${userId}/products` : "/login"} className={`nav-link px-3 ${isActiveRoute('/user/products')}`} onClick={closeMobileMenu}>
                   <i className="bi bi-grid me-1"></i> Products
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/user/orders" className={`nav-link px-3 ${isActiveRoute('/user/orders')}`} onClick={closeMobileMenu}>
+                <Link to={userId ? `/user/${userId}/orders` : "/login"} className={`nav-link px-3 ${isActiveRoute('/user/orders')}`} onClick={closeMobileMenu}>
                   <i className="bi bi-box me-1"></i> My Orders
                 </Link>
               </li>
@@ -84,14 +92,14 @@ export const UserNavbar = () => {
             {/* Right Navigation */}
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link to="/user/wishlist" className={`nav-link position-relative ${isActiveRoute('/user/wishlist')}`} onClick={closeMobileMenu}>
+                <Link to={userId ? `/user/${userId}/wishlist` : "/login"} className={`nav-link position-relative ${isActiveRoute('/user/wishlist')}`} onClick={closeMobileMenu}>
                   <i className="bi bi-heart"></i>
                   <span className="ms-1">Wishlist</span>
                 </Link>
               </li>
 
               <li className="nav-item ms-3">
-                <Link to="/user/cart" className={`nav-link position-relative ${isActiveRoute('/user/cart')}`} onClick={closeMobileMenu}>
+                <Link  to={userId ? `/user/${userId}/cart` : "/login"} className={`nav-link position-relative ${isActiveRoute('/user/cart')}`} onClick={closeMobileMenu}>
                   <i className="bi bi-cart3"></i>
                   <span className="ms-1">Cart</span>
                 </Link>
@@ -104,23 +112,23 @@ export const UserNavbar = () => {
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end shadow-sm border-0">
                   <li>
-                    <Link to="/user/profile" className="dropdown-item py-2" onClick={closeMobileMenu}>
+                    <Link  to={userId ? `/user/${userId}/profile` : "/login"} className="dropdown-item py-2" onClick={closeMobileMenu}>
                       <i className="bi bi-person me-2"></i> Profile
                     </Link>
                   </li>
                   <li>
-                    <Link to="/user/addresses" className="dropdown-item py-2" onClick={closeMobileMenu}>
+                    <Link  to={userId ? `/user/${userId}/addresses` : "/login"} className="dropdown-item py-2" onClick={closeMobileMenu}>
                       <i className="bi bi-geo-alt me-2"></i> Addresses
                     </Link>
                   </li>
                   <li>
-                    <Link to="/user/reviews" className="dropdown-item py-2" onClick={closeMobileMenu}>
+                    <Link  to={userId ? `/user/${userId}/reviews` : "/login"}  className="dropdown-item py-2" onClick={closeMobileMenu}>
                       <i className="bi bi-star me-2"></i> Reviews
                     </Link>
                   </li>
                   <li><hr className="dropdown-divider" /></li>
                   <li>
-                    <Link to="/user/logout" className="dropdown-item py-2 text-danger" onClick={closeMobileMenu}>
+                    <Link  to={userId ? `/user/${userId}/logout` : "/login"} className="dropdown-item py-2 text-danger" onClick={closeMobileMenu}>
                       <i className="bi bi-box-arrow-right me-2"></i> Sign Out
                     </Link>
                   </li>
@@ -151,22 +159,22 @@ export const UserNavbar = () => {
                 <h5 className="fw-bold mb-3 text-primary">Quick Links</h5>
                 <ul className="list-unstyled mb-0">
                   <li className="mb-2">
-                    <Link to="/user/home" className="text-decoration-none text-muted hover-primary d-inline-flex align-items-center" onClick={closeMobileMenu}>
+                    <Link to={userId ? `/user/${userId}/home` : "/login"} className="text-decoration-none text-muted hover-primary d-inline-flex align-items-center" onClick={closeMobileMenu}>
                       <i className="bi bi-chevron-right me-2 small"></i> Home
                     </Link>
                   </li>
                   <li className="mb-2">
-                    <Link to="/user/products" className="text-decoration-none text-muted hover-primary d-inline-flex align-items-center" onClick={closeMobileMenu}>
+                    <Link to={userId ? `/user/${userId}/products` : "/login"} className="text-decoration-none text-muted hover-primary d-inline-flex align-items-center" onClick={closeMobileMenu}>
                       <i className="bi bi-chevron-right me-2 small"></i> Products
                     </Link>
                   </li>
                   <li className="mb-2">
-                    <Link to="/user/cart" className="text-decoration-none text-muted hover-primary d-inline-flex align-items-center" onClick={closeMobileMenu}>
+                    <Link to={userId ? `/user/${userId}/cart` : "/login"} className="text-decoration-none text-muted hover-primary d-inline-flex align-items-center" onClick={closeMobileMenu}>
                       <i className="bi bi-chevron-right me-2 small"></i> Cart
                     </Link>
                   </li>
-                  <li className="mb-2">
-                    <Link to="/user/profile" className="text-decoration-none text-muted hover-primary d-inline-flex align-items-center" onClick={closeMobileMenu}>
+                  <li clasto={userId ? `/user/${userId}/profile` : "/login"}sName="mb-2">
+                    <Link  className="text-decoration-none text-muted hover-primary d-inline-flex align-items-center" onClick={closeMobileMenu}>
                       <i className="bi bi-chevron-right me-2 small"></i> Profile
                     </Link>
                   </li>

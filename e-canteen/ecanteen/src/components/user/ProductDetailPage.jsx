@@ -11,6 +11,13 @@ const ProductDetailPage = () => {
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
   const [reviews, setReviews] = useState([]);
+  const [userId, setUserId] = useState();
+  
+  useEffect(() => {
+    const id = localStorage.getItem("id");
+    setUserId(id);
+  }, []);
+  
 
   useEffect(() => {
     const fetchProductData = async () => {

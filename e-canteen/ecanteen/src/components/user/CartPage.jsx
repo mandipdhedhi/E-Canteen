@@ -11,6 +11,13 @@ const CartPage = () => {
   const [couponApplied, setCouponApplied] = useState(false);
   const [discount, setDiscount] = useState(0);
   const [isdisable, setisdisable] = useState(false)
+  const [userId, setUserId] = useState();
+
+useEffect(() => {
+  const id = localStorage.getItem("id");
+  setUserId(id);
+}, []);
+
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -20,7 +27,7 @@ const CartPage = () => {
         const userId = localStorage.getItem("id");
         
         // console.log(userId)
-        const response = await axios.get(`/cart/6886f2022918e10fe2e6ef00`);
+        const response = await axios.get(`/cart/${userId}`);
         console.log(response.data)
     
        setCartItems(response.data);
@@ -74,7 +81,7 @@ const CartPage = () => {
 
 
   const handleProceedToCheckout = () => {
-      navigate('/user/checkout');
+      navigate(`/user/${userId}/checkout`);
   };
 
   // Calculate cart totals
@@ -127,7 +134,7 @@ const CartPage = () => {
             <i className="bi bi-cart-x fs-1 text-muted mb-3"></i>
             <h3 className="h4 mb-3">Your cart is empty</h3>
             <p className="text-muted mb-4">Looks like you haven't added any items to your cart yet.</p>
-            <Link to="/user/products" className="btn btn-primary">
+            <Link to={userId ? `/user/${userId}/products` : "/login"} className="btn btn-primary">
               Browse Products
             </Link>
           </div>
@@ -170,7 +177,7 @@ const CartPage = () => {
                                 style={{ width: '60px', height: '60px', objectFit: 'cover' }}
                               />
                               <div>
-                                <Link to={`/user/products/₹{item.productId._id}`} className="text-decoration-none">
+                                <Link to={`/user/products/${item.productId._id}`} className="text-decoration-none">
                                   <h6 className="mb-0">{item.productId. productName}</h6>
                                 </Link>
                                 {!item.productId.inStock && (
@@ -223,7 +230,7 @@ const CartPage = () => {
             </div>
             
             <div className="d-flex justify-content-between">
-              <Link to="/user/products" className="btn btn-outline-primary mt-3">
+              <Link to={userId ? `/user/${userId}/products` : "/login"} className="btn btn-outline-primary mt-3">
                 <i className="bi bi-arrow-left me-2"></i>
                 Continue Shopping
               </Link>

@@ -169,6 +169,12 @@ const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+   const [userId, setUserId] = useState();
+  
+  useEffect(() => {
+    const id = localStorage.getItem("id");
+    setUserId(id);
+  }, []);
 
   useEffect(() => {
 
@@ -263,7 +269,7 @@ const HomePage = () => {
           <div>
             <h1 style={styles.heroTitle}>Welcome to E-Canteen</h1>
             <p style={styles.heroText}>Discover delicious meals and quick delivery</p>
-            <Link to="/user/products" style={styles.heroButton}>
+            <Link to={userId ? `/user/${userId}/products` : "/login"} style={styles.heroButton}>
               Browse Menu
             </Link>
           </div>
@@ -277,7 +283,7 @@ const HomePage = () => {
           {categories.map((category) => (
             <Link
               key={category.id}
-              to={`/user/products?category=${category.name}`}
+              to={userId ? `/user/${userId}/products?category=${category.name}` : "/login"}
               style={styles.categoryCard}
             >
               <img
@@ -334,7 +340,7 @@ const HomePage = () => {
                 <div style={styles.buttonContainer}>
                   <Link
                     // to={`/user/products/${product._id}`}
-                    to={`/user/products/`}
+                    to={userId ? `/user/${userId}/products` : "/login"}
                     style={styles.viewButton}
                   >
                     View Details

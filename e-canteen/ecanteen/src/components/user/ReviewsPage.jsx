@@ -11,6 +11,13 @@ const ReviewsPage = () => {
   const { orderId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const [userId, setUserId] = useState();
+
+useEffect(() => {
+  const id = localStorage.getItem("id");
+  setUserId(id);
+}, []);
+
 
   // React Hook Form setup
   const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm({
@@ -190,7 +197,7 @@ const ReviewsPage = () => {
             </div>
             {!location.pathname.includes('/reviews/add') && (
               <Link
-                to="/user/orders"
+                to={userId ? `/user/${userId}/orders` : "/login"}
                 className="btn btn-primary"
               >
                 <i className="bi bi-plus-lg me-2"></i>
@@ -345,7 +352,7 @@ const ReviewsPage = () => {
                   <i className="bi bi-star fs-1 text-muted mb-3"></i>
                   <h3 className="h4 mb-3">No reviews yet</h3>
                   <p className="text-muted mb-4">You haven't written any reviews yet.</p>
-                  <Link to="/user/orders" className="btn btn-primary">
+                  <Link to={userId ? `/user/${userId}/orders` : "/login"} className="btn btn-primary">
                     View Your Orders
                   </Link>
                 </div>

@@ -86,8 +86,8 @@ function App() {
         {/* <Route path="/" element={<PrivateRoutes />}>  */}
           <Route path='/' element={<UserPrivateRoute/>}> 
 
-            <Route path='/user' element={<UserNavbar/>}>
-           {/* <Route path='/user' element={<Navbar/>}> */}
+            <Route path='/user/:userId/' element={<UserNavbar/>}>
+           
 
             <Route index element={<HomePage />} />
            

@@ -9,6 +9,13 @@ const OrderHistoryPage = () => {
   const [error, setError] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [enableReviews,setEnableReviews] = useState(true)
+  const [userId, setUserId] = useState();
+
+useEffect(() => {
+  const id = localStorage.getItem("id");
+  setUserId(id);
+}, []);
+
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -16,6 +23,7 @@ const OrderHistoryPage = () => {
         setLoading(true);
          
         const userID=localStorage.getItem("id")
+        console.log("userId get to local: ",userID)
         const response = await axios.get(`/orderdetail/${userID}`);
         console.log("get the order",response.data)
 
@@ -151,7 +159,8 @@ const OrderHistoryPage = () => {
             <i className="bi bi-bag-x fs-1 text-muted mb-3"></i>
             <h3 className="h4 mb-3">No orders found</h3>
             <p className="text-muted mb-4">You haven't placed any orders yet.</p>
-            <Link to="/user/products" className="btn btn-primary">
+            <Link
+             to={userId ? `/user/${userId}/products` : "/login"}  className="btn btn-primary">
               Start Shopping
             </Link>
           </div>
@@ -331,7 +340,7 @@ const OrderHistoryPage = () => {
                   <div className="d-flex justify-content-end gap-2">
                     <div className='align-self-center'>
                     <Link 
-                      to={`/user/reviews/add/${order._id}`} 
+                      to={`/user/${userId}/reviews/add/${order._id}`} 
                       className={`btn btn-primary ${enableReviews ? '' : 'disabled'}`}
                       style={{ display: orderStatus.status === 'delivered' ? 'block' : 'none' }}
                       

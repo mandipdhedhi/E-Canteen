@@ -8,6 +8,13 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [userId, setUserId] = useState();
+
+useEffect(() => {
+  const id = localStorage.getItem("id");
+  setUserId(id);
+}, []);
+
   
   // User profile state
   const [profile, setProfile] = useState({
@@ -171,11 +178,11 @@ const ProfilePage = () => {
               <h5 className="card-title mb-1">{profile.name}</h5>
               <p className="text-muted small mb-3">{profile.email}</p>
               <div className="d-flex justify-content-center gap-2 mb-3">
-                <Link to="/user/orders" className="btn btn-outline-primary btn-sm">
+                <Link  to={userId ? `/user/${userId}/orders` : "/login"} className="btn btn-outline-primary btn-sm">
                   <i className="bi bi-box me-2"></i>
                   Orders ({orders.length})
                 </Link>
-                <Link to="/user/addresses" className="btn btn-outline-primary btn-sm">
+                <Link  to={userId ? `/user/${userId}/addresses` : "/login"} className="btn btn-outline-primary btn-sm">
                   <i className="bi bi-geo-alt me-2"></i>
                   Addresses
                 </Link>
