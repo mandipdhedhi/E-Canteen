@@ -249,14 +249,14 @@ useEffect(() => {
                                   className="img-thumbnail me-3" 
                                   style={{ width: '50px', height: '50px', objectFit: 'cover' }}
                                 />
-                                <div>
+                                {/* <div>
                                   <h6 className="mb-0">{item.productId.productName}</h6>
-                                </div>
+                                </div> */}
                               </div>
                             </td>
-                            <td>₹{item.productId.offerPrice?.toFixed(2)}</td>
-                            <td>{item.quantity}</td>
-                            <td className="text-end">₹{(item.productId.offerPrice * item.quantity).toFixed(2)}</td>
+                            <td style={{textAlign:'center',verticalAlign:'middle'}}>₹{item.productId.offerPrice?.toFixed(2)}</td>
+                            <td style={{textAlign:'center',verticalAlign:'middle'}}>{item.quantity}</td>
+                            <td className="text-end" style={{textAlign:'center',verticalAlign:'middle'}}>₹{(item.productId.offerPrice * item.quantity).toFixed(2)}</td>
                           </tr>
                         ))}
                       </tbody>
