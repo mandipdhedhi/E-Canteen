@@ -188,7 +188,7 @@ useEffect(() => {
                           </td>
                           <td>₹{item.productId.offerPrice }</td>
                           <td>
-                            <div className="input-group" style={{ width: '120px' }}>
+                            <div className="input-group" style={{ width: '130px' }}>
                               <button 
                                 className="btn btn-outline-secondary btn-sm" 
                                 type="button"
@@ -202,6 +202,7 @@ useEffect(() => {
                                 value={item.quantity}
                                 onChange={() => handleQuantityChange(item._id, item.quantity)}
                                 min="1"
+                                style={{marginRight:'10px'}}
                               />
                               <button 
                                 className="btn btn-outline-secondary btn-sm " 
@@ -212,7 +213,7 @@ useEffect(() => {
                               </button>
                             </div>
                           </td>
-                          <td>₹{(item.productId.offerPrice * item.quantity)}</td>
+                          <td style={{textAlign:'center',verticalAlign:'middle'}}>₹{(item.productId.offerPrice * item.quantity)}</td>
                           <td>
                             <button 
                               className="btn btn-sm btn-outline-danger"

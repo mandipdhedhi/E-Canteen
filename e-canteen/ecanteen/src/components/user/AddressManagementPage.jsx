@@ -145,6 +145,11 @@ const AddressManagementPage = () => {
                 Add New Address
               </button>
             )}
+             <div className="mt-3">
+                    <Link to={userId ? `/user/${userId}/checkout` : "/login"} className="btn btn-outline-primary">
+                      Add New Address
+                    </Link>
+                  </div>
           </div>
         </div>
       </div>
