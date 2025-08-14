@@ -81,7 +81,7 @@ function App() {
         <Route path='/forgot' element={<ForgotPassword/>}></Route>
         <Route path='/resetpassword/:token' element={<ResetPassword/>}/>
         <Route path='/' element={<Homepage/>}></Route>
-        <Route path='/user/logout' element={<Logout/>}/>
+        <Route path='/user/:userId/logout' element={<Logout/>}/>
 
         {/* <Route path="/" element={<PrivateRoutes />}>  */}
           <Route path='/' element={<UserPrivateRoute/>}> 
