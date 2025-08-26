@@ -21,7 +21,7 @@ useEffect(() => {
     name: '',
     email: '',
     phone: '',
-    avatar: '',
+    profilePhoto: '',
     dateJoined: '',
     totalOrders: 0
   });
@@ -54,7 +54,7 @@ useEffect(() => {
         name: userData.name || '',
         email: userData.email || '',
         phone: userData.phone || '',
-        avatar: userData.avatar || 'https://via.placeholder.com/150',
+        profilePhoto: userData.profilePhoto || '',
         dateJoined: userData.createdAt || new Date().toISOString(),
         totalOrders: userData.totalOrders || 0
       });
@@ -86,8 +86,19 @@ useEffect(() => {
     console.log(data)
     try {
       setLoading(true);
+      const formData = new FormData();
+      formData.append('name',data.name)
+      formData.append('email',data.email)
+      formData.append('confirmPassword',data.confirmPassword)
+      formData.append('currentPassword',data.currentPassword)
+      formData.append('newPassword',data.newPassword)
+      
+      if (data.file && data.file[0]) {
+            formData.append("profilePhoto", data.file[0]);
+        }
       const res = await axios.post('/user/changepassword', data)
       console.log(res)
+      fetchProfile()
       alert('Password changed successfully')
       // Validate passwords if changing
       if (data.newPassword) {
@@ -169,12 +180,61 @@ useEffect(() => {
         <div className="col-lg-4 mb-4">
           <div className="card shadow-sm">
             <div className="card-body text-center">
-              <img
+              {/* <img
                 src={profile.avatar}
                 alt={profile.name}
                 className="rounded-circle mb-3"
                 style={{ width: '120px', height: '120px', objectFit: 'cover' }}
-              />
+              /> */}
+
+               <div className="position-relative d-inline-block">
+                        <label htmlFor="profile">
+                            {profile?.profilePhoto ? (
+                                <img
+                                    src={`http://localhost:3002/uploads/${profile?.profilePhoto}`}
+                                    // src={URL.createObjectURL(profilePhoto)}
+                                    alt="Profile"
+                                    style={{
+                                        width: "100px",
+                                        height: "100px",
+                                        borderRadius: "50%",
+                                        objectFit: "cover",
+                                    }}
+                                />
+
+                            ) : (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="100"
+                                    height="100"
+                                    fill="currentColor"
+                                    className="bi bi-person-circle form-label"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                                    />
+                                </svg>
+                            )}
+                        </label>
+                        <i
+                            className="bi bi-pencil-square position-absolute"
+                            style={{
+                                bottom: "5px",
+                                right: "34%",
+                                backgroundColor: "white",
+                                borderRadius: "50%",
+                                padding: "3px",
+                                fontSize: "16px",
+                                cursor: "pointer",
+                            }}
+                            // onClick={handleShow}
+                            ></i>
+                        <input type="file" name="" id="profile" className='form-control-file' style={{ display: 'none' }} {...register("file")} />
+
+                    </div>
               <h5 className="card-title mb-1">{profile.name}</h5>
               <p className="text-muted small mb-3">{profile.email}</p>
               <div className="d-flex justify-content-center gap-2 mb-3">

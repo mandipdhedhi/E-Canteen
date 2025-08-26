@@ -25,6 +25,10 @@ const userSchema= new Schema({
        email:{
         type:String,
         unique:true
+       },
+       profilePhoto: {
+       type: String,
+        default: ""
        }
 })
 

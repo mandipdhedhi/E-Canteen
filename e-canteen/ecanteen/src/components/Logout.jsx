@@ -6,8 +6,8 @@ export const Logout = () => {
 
     useEffect(()=>{
        localStorage.clear()
-    navigate("/login")
+    navigate("/home/login")
     },[navigate])
    
-  return null
+  return null 
 }

@@ -6,6 +6,7 @@ const mailUtil = require("../utils/MailUtil")
 const jwt= require("jsonwebtoken");
 const e = require("cors");
 const { default: mongoose } = require("mongoose");
+const { response } = require("express");
 const secret="secret";
 
 
@@ -282,7 +283,7 @@ const resetpassword = async (req, res) => {
 
 const changePassword = async (req, res) => {
     try {
-        const { email, currentPassword, newPassword, confirmPassword } = req.body;
+        const { email, currentPassword, newPassword, confirmPassword,profilePhoto } = req.body;
 
         if (newPassword !== confirmPassword) {
             return res.status(400).json({ message: "New password and confirm password do not match..." });
@@ -305,9 +306,13 @@ const changePassword = async (req, res) => {
         const salt = bcrypt.genSaltSync(10);
         const hashedNewPassword = bcrypt.hashSync(newPassword, salt);
         user.password = hashedNewPassword;
+        if (req.file) {
+      user.profilePhoto = req.file.filename; // multer stores filename
+    }
+    
         await user.save();
-
-        return res.status(200).json({ message: "Password changed successfully..." });
+      
+        return res.status(200).json({ message: "Password changed successfully...",response:res });
     } catch (err) {
         console.error("Change Password Error:", err);
         return res.status(500).json({ message: "Internal Server Error", error: err.message });
