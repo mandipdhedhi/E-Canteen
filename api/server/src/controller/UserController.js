@@ -306,9 +306,9 @@ const changePassword = async (req, res) => {
         const salt = bcrypt.genSaltSync(10);
         const hashedNewPassword = bcrypt.hashSync(newPassword, salt);
         user.password = hashedNewPassword;
-        if (req.file) {
-      user.profilePhoto = req.file.filename; // multer stores filename
-    }
+    //     if (req.file) {
+    //   user.profilePhoto = req.file.filename; // multer stores filename
+    // }
     
         await user.save();
       

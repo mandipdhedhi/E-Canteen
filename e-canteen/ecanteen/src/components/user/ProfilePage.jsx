@@ -98,7 +98,7 @@ useEffect(() => {
         }
       const res = await axios.post('/user/changepassword', data)
       console.log(res)
-      fetchProfile()
+      
       alert('Password changed successfully')
       // Validate passwords if changing
       if (data.newPassword) {
