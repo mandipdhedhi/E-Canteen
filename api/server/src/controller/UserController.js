@@ -283,7 +283,7 @@ const resetpassword = async (req, res) => {
 
 const changePassword = async (req, res) => {
     try {
-        const { email, currentPassword, newPassword, confirmPassword,profilePhoto } = req.body;
+        const { email, currentPassword, newPassword, confirmPassword } = req.body;
 
         if (newPassword !== confirmPassword) {
             return res.status(400).json({ message: "New password and confirm password do not match..." });
@@ -291,7 +291,7 @@ const changePassword = async (req, res) => {
 
         let user = await usermodel.findOne({ email }).populate("roleId");
         if (!user) {
-            user = await adminmode.findOne({ email }).populate("roleId");
+            user = await adminmode. findOne({ email }).populate("roleId");
         }
 
         if (!user) {
